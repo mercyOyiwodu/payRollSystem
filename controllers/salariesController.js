@@ -13,7 +13,6 @@ exports.createSalaries = async (req, res) => {
         if (!employee) {
             return res.status(404).json({ message: 'employee not found' });
         }
-
         const monthlySalaryStatus = await Salaries.findOne({ where: { employee_id: employee.id } });
 
         if (monthlySalaryStatus && monthlySalaryStatus.month === month && monthlySalaryStatus.year === year) {
@@ -42,6 +41,7 @@ exports.getOneSalaries = async (req, res) => {
         const getSalaries = await Salaries.findByPk( id );
         
         res.status(200).json({ message: `employee with id ${id} has been found`, getSalaries });
+        
     } catch (error) {
         res.status(500).json({ message: 'internal server error', error: error.message });
     }
